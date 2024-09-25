@@ -48,5 +48,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	<!-- react-native-vector-icons -->
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesome.ttf</string>
+	</array>
 </dict>
 </plist>
