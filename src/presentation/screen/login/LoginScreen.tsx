@@ -5,7 +5,19 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export const LoginScreen = () => {
   const [eyeView, setEyeView] = useState<boolean>(true);
 
-  const handleLogin = () => {};
+  interface FormInterface {
+    email: string;
+    password: string;
+  }
+  const [formState, setFormState] = useState<FormInterface>({
+    email: '',
+    password: '',
+  });
+
+  const handleLogin = () => {
+    console.log(formState.email);
+    console.log(formState.password);
+  };
 
   const handelViewPassword = () => {
     setEyeView(!eyeView);
@@ -17,6 +29,8 @@ export const LoginScreen = () => {
       <Text style={styles.text}>Correo electrónico</Text>
       <View style={styles.searchSection}>
         <TextInput
+          value={formState.email}
+          onChangeText={email => setFormState({...formState, email})}
           style={styles.input}
           placeholder="Ingrese su correo"
           autoCapitalize="none"
@@ -28,6 +42,8 @@ export const LoginScreen = () => {
       <Text style={styles.text}>Contraseña</Text>
       <View style={styles.searchSection}>
         <TextInput
+          value={formState.password}
+          onChangeText={password => setFormState({...formState, password})}
           style={styles.input}
           placeholder="Ingrese su contraseña"
           autoCapitalize="none"
