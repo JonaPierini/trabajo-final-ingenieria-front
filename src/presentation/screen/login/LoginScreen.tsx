@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View, TextInput, StyleSheet, Pressable, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useAuthStore} from '../../../store/auth/useAuthStore';
+import {authLogin} from '../../../actions/auth/auth';
 
 export const LoginScreen = () => {
   const [eyeView, setEyeView] = useState<boolean>(true);
@@ -14,9 +16,11 @@ export const LoginScreen = () => {
     password: '',
   });
 
+  //store
+  const {loggin} = useAuthStore();
+
   const handleLogin = () => {
-    console.log(formState.email);
-    console.log(formState.password);
+    authLogin('test@gmail.com', '123456780');
   };
 
   const handelViewPassword = () => {

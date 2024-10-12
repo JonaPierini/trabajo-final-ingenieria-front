@@ -2,7 +2,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Text, View} from 'react-native';
 import React from 'react';
-import {AuthNavigation} from '../AuthNavigation/AuthNavigation';
+import {AuthNavigation} from '../authNavigation/AuthNavigation';
+import {useAuthStore} from '../../../store/auth/useAuthStore';
 
 export type RootStackParams = {
   //Los nombres tienen que coicidir con los pasados en el Stack.Screen name
@@ -14,8 +15,7 @@ const Stack = createNativeStackNavigator<RootStackParams>();
 
 export const AppNavigation = () => {
   //USEAMOS el store
-  const status = 'unAuthorized';
-  console.log(status);
+  const {status} = useAuthStore();
 
   function RouteNavigation() {
     return (

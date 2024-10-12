@@ -14,7 +14,6 @@ export const AuthNavigation = () => {
       initialRouteName="LoginScreen"
       screenOptions={{
         headerShown: false,
-        //cardStyleInterpolator: fadeAnimation
       }}>
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
