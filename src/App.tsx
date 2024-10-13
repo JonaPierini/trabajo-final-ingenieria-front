@@ -9,7 +9,7 @@ const Mytheme = {
   dark: true,
   colors: {
     primary: 'rgb(255, 45, 85)',
-    background: '#202023', // Color de fondo
+    background: '#46464b', // Color de fondo
     card: 'rgb(255, 255, 255)',
     text: 'rgb(28, 28, 30)',
     border: 'rgb(199, 199, 204)',

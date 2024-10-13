@@ -1,8 +1,14 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet, Pressable, Text} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  Text,
+  Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useAuthStore} from '../../../store/auth/useAuthStore';
-import {authLogin} from '../../../actions/auth/auth';
 
 export const LoginScreen = () => {
   const [eyeView, setEyeView] = useState<boolean>(true);
@@ -17,10 +23,17 @@ export const LoginScreen = () => {
   });
 
   //store
-  const {loggin} = useAuthStore();
+  const {login} = useAuthStore();
 
-  const handleLogin = () => {
-    authLogin('test@gmail.com', '123456780');
+  const handleLogin = async () => {
+    const wasSuccessful = await login('test@gmail.com', '12345678');
+    // eslint-disable-next-line curly
+    if (wasSuccessful) return;
+    Alert.alert('Error', 'Usuario o contraseña incorrectos');
+  };
+
+  const handleCancel = async () => {
+    setFormState({email: '', password: ''});
   };
 
   const handelViewPassword = () => {
@@ -62,9 +75,14 @@ export const LoginScreen = () => {
       </View>
 
       {/* Ingresar */}
-      <Pressable onPress={handleLogin} style={styles.btn}>
-        <Text>Iniciar sesión</Text>
-      </Pressable>
+      <View style={styles.btnContainer}>
+        <Pressable onPress={handleLogin} style={styles.btn}>
+          <Text>Iniciar sesión</Text>
+        </Pressable>
+        <Pressable onPress={handleCancel} style={styles.btn}>
+          <Text>Cancelar</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -82,12 +100,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
   },
+  btnContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
   btn: {
     backgroundColor: '#CFE060',
     alignItems: 'center',
-    width: '100%',
+    width: '50%',
     padding: 15,
     marginTop: 30,
+    marginLeft: 2,
   },
 
   searchSection: {
