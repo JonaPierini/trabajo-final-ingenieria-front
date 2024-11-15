@@ -7,7 +7,7 @@ export const HomeScreen = () => {
 
   return (
     <View>
-      <Text>HomeScreen - Bienvenido {user?.name}</Text>
+      <Text>Home - Bienvenido {user?.name}</Text>
       <Pressable onPress={logout}>
         <Text>Cerrar sesion</Text>
       </Pressable>
