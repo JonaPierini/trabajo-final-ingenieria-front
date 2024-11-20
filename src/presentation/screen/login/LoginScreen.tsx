@@ -26,7 +26,8 @@ export const LoginScreen = () => {
   const {login} = useAuthStore();
 
   const handleLogin = async () => {
-    const wasSuccessful = await login('test@gmail.com', '12345678');
+    //'test@gmail.com', '12345678'
+    const wasSuccessful = await login(formState.email, formState.password);
     // eslint-disable-next-line curly
     if (wasSuccessful) return;
     Alert.alert('Error', 'Usuario o contraseña incorrectos');
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: 'flex-start',
-    color: '#FFF',
+    color: '#000',
     marginBottom: 10,
     marginTop: 10,
   },
@@ -130,6 +131,5 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10,
     backgroundColor: '#fff',
-    color: '#424242',
   },
 });
