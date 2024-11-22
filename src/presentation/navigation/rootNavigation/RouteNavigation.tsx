@@ -21,7 +21,6 @@ const Tab = createBottomTabNavigator<RouteNavigationParams>();
 export const RouteNavigation = () => {
   return (
     <>
-      <BackButton />
       <Tab.Navigator
         screenOptions={{
           unmountOnBlur: true,

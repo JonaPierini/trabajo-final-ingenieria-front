@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {ClientScreen} from '../../screen/client/ClientScreen';
 import {ClientId} from '../../screen/client/ClientId';
+import {BackButton} from '../../components/backButton/BackButton';
 
 export type ClientStackParams = {
   //Los nombres tienen que coicidir con los pasados en el Stack.Screen name

@@ -13,3 +13,13 @@ export interface ApiResponseClient {
   msg: string;
   allClient: Client[] | [];
 }
+
+export interface ApiResponseClientById {
+  msg: string;
+  clientById: Client;
+}
+
+export interface ApiResponseDeleteClientById {
+  msg: string;
+  client: Client;
+}

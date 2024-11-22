@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Text, StyleSheet, ScrollView, Pressable} from 'react-native';
+import {Text, StyleSheet, ScrollView, Pressable, View} from 'react-native';
 import {getClient} from '../../../actions/client/getClient';
 import {Client} from '../../../infrastructure/client.response';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {Card} from '../../components/card/Card';
 
 export type ClientScreenParams = {
   ClientId: {
@@ -27,22 +28,23 @@ export const ClientScreen = () => {
       {client.map(item => (
         <Pressable
           key={item._id}
-          style={styles.mainView}
           onPress={() =>
             navigation.navigate('ClientId', {
               clientId: item._id,
               name: item.name,
             })
           }>
-          <Text>Nombre: {item.name}</Text>
-          <Text>Email: {item.email}</Text>
-          <Text>Dirección: {item.address}</Text>
-          <Text>Localidad: {item.location}</Text>
-          <Text>Provincia: {item.provinces}</Text>
-          <Text>
-            Creado el: {new Date(item.createdAt).toLocaleDateString()}
-          </Text>
-          <Text>--------------------</Text>
+          <Card>
+            <Text>Nombre: {item.name}</Text>
+            <Text>Email: {item.email}</Text>
+            <Text>Dirección: {item.address}</Text>
+            <Text>Localidad: {item.location}</Text>
+            <Text>Provincia: {item.provinces}</Text>
+            <Text>
+              Creado el: {new Date(item.createdAt).toLocaleDateString()}
+            </Text>
+            <Text>--------------------</Text>
+          </Card>
         </Pressable>
       ))}
     </ScrollView>
@@ -51,16 +53,6 @@ export const ClientScreen = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    padding: 10,
-  },
-  mainView: {
-    marginBottom: 20, // Espaciado entre los elementos
-    padding: 10,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 5,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3, // Solo en Android
+    paddingTop: 10,
   },
 });
