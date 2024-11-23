@@ -12,6 +12,10 @@ export type ClientStackParams = {
   ClientId: {
     clientId: string;
     name: string;
+    email: string;
+    address: string;
+    location: string;
+    provinces: string;
   };
 };
 

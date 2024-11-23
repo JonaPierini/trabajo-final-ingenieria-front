@@ -1,12 +1,12 @@
 export interface Client {
-  _id: string;
+  _id?: string;
   name: string;
   email: string;
   address: string;
   location: string;
   provinces: string;
-  createdAt: string; // ISO date string
-  __v: number;
+  createdAt?: string; // ISO date string
+  __v?: number;
 }
 
 export interface ApiResponseClient {
@@ -20,6 +20,11 @@ export interface ApiResponseClientById {
 }
 
 export interface ApiResponseDeleteClientById {
+  msg: string;
+  client: Client;
+}
+
+export interface ApiResponseUpdateClientById {
   msg: string;
   client: Client;
 }

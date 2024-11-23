@@ -7,8 +7,12 @@ import {Card} from '../../components/card/Card';
 
 export type ClientScreenParams = {
   ClientId: {
-    clientId: string;
+    clientId?: string;
     name: string;
+    email: string;
+    address: string;
+    location: string;
+    provinces: string;
   };
 };
 
@@ -32,6 +36,10 @@ export const ClientScreen = () => {
             navigation.navigate('ClientId', {
               clientId: item._id,
               name: item.name,
+              email: item.email,
+              address: item.address,
+              location: item.location,
+              provinces: item.provinces,
             })
           }>
           <Card>
@@ -41,7 +49,7 @@ export const ClientScreen = () => {
             <Text>Localidad: {item.location}</Text>
             <Text>Provincia: {item.provinces}</Text>
             <Text>
-              Creado el: {new Date(item.createdAt).toLocaleDateString()}
+              Creado el: {new Date(item.createdAt!).toLocaleDateString()}
             </Text>
             <Text>--------------------</Text>
           </Card>
