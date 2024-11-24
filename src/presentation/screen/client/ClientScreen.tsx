@@ -14,6 +14,7 @@ export type ClientScreenParams = {
     location: string;
     provinces: string;
   };
+  NewClient: undefined;
 };
 
 export const ClientScreen = () => {
@@ -29,6 +30,11 @@ export const ClientScreen = () => {
 
   return (
     <ScrollView style={styles.scrollView}>
+      <Pressable
+        style={styles.newClient}
+        onPress={() => navigation.navigate('NewClient')}>
+        <Text>Agregar nuevo</Text>
+      </Pressable>
       {client.map(item => (
         <Pressable
           key={item._id}
@@ -62,5 +68,10 @@ export const ClientScreen = () => {
 const styles = StyleSheet.create({
   scrollView: {
     paddingTop: 10,
+  },
+  newClient: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10,
   },
 });

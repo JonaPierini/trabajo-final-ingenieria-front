@@ -71,13 +71,20 @@ export const ClientId = () => {
 
   const handleConfirm = () => {
     updateClientById(params.clientId, formState) // Envía el ID y los datos actualizados
-      .then(updatedClient => {
-        console.log('Cliente actualizado:', updatedClient); // Muestra la respuesta de la API
-        setClientId(formState); // Actualiza el estado local con los nuevos valores
-        setUp(false); // Sale del modo edición
+      .then(() => {
+        {
+          setClientId(formState); // Actualiza el estado local con los nuevos valores
+          Alert.alert('Cliente actualizado con existo', '', [
+            {
+              text: 'OK',
+              onPress: () => navigation.goBack(),
+            },
+          ]);
+          setUp(false); // Sale del modo edición
+        }
       })
       .catch(e => {
-        console.log('Error al actualizar cliente:', e);
+        Alert.alert(`${e.message}`);
       });
   };
 

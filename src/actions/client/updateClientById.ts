@@ -1,3 +1,4 @@
+import {AxiosError} from 'axios';
 import {salesApi} from '../../config/api/selesApi';
 import {
   ApiResponseUpdateClientById,
@@ -13,11 +14,18 @@ export const updateClientById = async (
       `putClient/${id}`,
       clientData, // Aquí pasamos el cuerpo de la solicitud
     );
-    console.log('pepepepeppe');
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
-    return null;
+    if (
+      error instanceof AxiosError &&
+      error.response &&
+      error.response.data.errors
+    ) {
+      throw new Error(
+        error.response.data.errors.map((err: any) => err.msg).join(', '),
+      );
+    } else {
+      throw new Error('Error al actualizar el cliente');
+    }
   }
 };
