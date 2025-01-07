@@ -28,3 +28,8 @@ export interface ApiResponseUpdateClientById {
   msg: string;
   client: Client;
 }
+
+export interface ApiResponseNewClient {
+  msg: string;
+  client: Client;
+}
