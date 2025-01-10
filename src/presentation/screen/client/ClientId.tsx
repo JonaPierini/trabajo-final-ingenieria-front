@@ -17,14 +17,6 @@ import {Card} from '../../components/card/Card';
 import {deleteClientById} from '../../../actions/client/deleteClientById';
 import {updateClientById} from '../../../actions/client/updateClientById';
 
-interface FormInterface {
-  name: string;
-  email: string;
-  address: string;
-  location: string;
-  provinces: string;
-}
-
 export const ClientId = () => {
   const navigation = useNavigation();
 

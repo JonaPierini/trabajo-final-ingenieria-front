@@ -66,7 +66,16 @@ export const NewClient = () => {
             value={formState.provinces}
             onChangeText={provinces => setFormState({...formState, provinces})}
           />
-          <Button title="Confirmar" onPress={handleNewClient}></Button>
+          <Button
+            title="Confirmar"
+            onPress={handleNewClient}
+            disabled={
+              formState.name.length === 0 ||
+              formState.email.length === 0 ||
+              formState.address.length === 0 ||
+              formState.location.length === 0 ||
+              formState.provinces.length === 0
+            }></Button>
         </Card>
       </>
     </View>

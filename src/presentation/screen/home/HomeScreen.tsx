@@ -7,7 +7,9 @@ export const HomeScreen = () => {
 
   return (
     <View>
-      <Text>Home - Bienvenido {user?.name}</Text>
+      <Text>
+        Home - Bienvenido {user?.name} - SU ROL ES: {user?.rol}
+      </Text>
       <Pressable onPress={logout}>
         <Text>Cerrar sesion</Text>
       </Pressable>
