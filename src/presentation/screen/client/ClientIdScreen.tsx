@@ -9,18 +9,19 @@ import {
   Alert,
   TextInput,
 } from 'react-native';
-import {ClientStackParams} from '../../navigation/clientNavigation/clientNavigation';
 import {getClientById} from '../../../actions/client/getClientById';
 import {Client} from '../../../infrastructure/client.response';
 import {BackButton} from '../../components/backButton/BackButton';
 import {Card} from '../../components/card/Card';
 import {deleteClientById} from '../../../actions/client/deleteClientById';
 import {updateClientById} from '../../../actions/client/updateClientById';
+import {ClientStackParams} from '../../navigation/clientNavigation/ClientNavigation';
 
-export const ClientId = () => {
+export const ClientIdScreen = () => {
   const navigation = useNavigation();
 
-  const params = useRoute<RouteProp<ClientStackParams, 'ClientId'>>().params;
+  const params =
+    useRoute<RouteProp<ClientStackParams, 'ClientIdScreen'>>().params;
 
   const [clientId, setClientId] = useState<Client | null>(null);
 

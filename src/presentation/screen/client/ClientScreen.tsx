@@ -1,12 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Text, StyleSheet, ScrollView, Pressable, View} from 'react-native';
 import {getClient} from '../../../actions/client/getClient';
 import {Client} from '../../../infrastructure/client.response';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {
+  NavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
 import {Card} from '../../components/card/Card';
 
 export type ClientScreenParams = {
-  ClientId: {
+  ClientIdScreen: {
     clientId?: string;
     name: string;
     email: string;
@@ -14,7 +18,7 @@ export type ClientScreenParams = {
     location: string;
     provinces: string;
   };
-  NewClient: undefined;
+  NewClientScreen: undefined;
 };
 
 export const ClientScreen = () => {
@@ -22,24 +26,29 @@ export const ClientScreen = () => {
 
   const navigation = useNavigation<NavigationProp<ClientScreenParams>>();
 
-  useEffect(() => {
-    getClient()
-      .then(elem => setClient(elem?.allClient || []))
-      .catch(e => console.log(e));
-  }, [client]);
+  // Cargar datos cuando la pantalla se enfoca
+  // useFocusEffect:  Este hook se ejecuta cada vez que la pantalla ClientScreen se enfoca (es decir, cuando regresas a ella desde NewClientScreen).
+  // useCallback: Se utiliza para evitar que la función proporcionada a useFocusEffect se cree en cada renderizado.
+  useFocusEffect(
+    useCallback(() => {
+      getClient()
+        .then(elem => setClient(elem?.allClient || []))
+        .catch(e => console.log(e));
+    }, []),
+  );
 
   return (
     <ScrollView style={styles.scrollView}>
       <Pressable
         style={styles.newClient}
-        onPress={() => navigation.navigate('NewClient')}>
+        onPress={() => navigation.navigate('NewClientScreen')}>
         <Text>Agregar nuevo</Text>
       </Pressable>
       {client.map(item => (
         <Pressable
           key={item._id}
           onPress={() =>
-            navigation.navigate('ClientId', {
+            navigation.navigate('ClientIdScreen', {
               clientId: item._id,
               name: item.name,
               email: item.email,

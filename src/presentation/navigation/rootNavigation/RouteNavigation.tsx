@@ -2,17 +2,16 @@ import React from 'react';
 import {HomeScreen} from '../../screen/home/HomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ProductScreen} from '../../screen/product/ProductScreen';
-import {BudgetScreen} from '../../screen/budget/BudgetScreen';
 import {SearchScreen} from '../../screen/search/SearchScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {ClientNavigation} from '../clientNavigation/clientNavigation';
-import {BackButton} from '../../components/backButton/BackButton';
+import {ClientNavigation} from '../clientNavigation/ClientNavigation';
+import {BudgetNavigation} from '../budgetNavigation/BudgetNavigation';
 
 export type RouteNavigationParams = {
   HomeScreen: undefined;
   ClientNavigation: undefined;
   ProductScreen: undefined;
-  BudgetScreen: undefined;
+  BudgetNavigation: undefined;
   SearchScreen: undefined;
 };
 
@@ -47,8 +46,8 @@ export const RouteNavigation = () => {
         />
         <Tab.Screen
           options={{title: 'Presupesto', tabBarIcon: BudgetIcon}}
-          name="BudgetScreen"
-          component={BudgetScreen}
+          name="BudgetNavigation"
+          component={BudgetNavigation}
         />
         <Tab.Screen
           options={{
