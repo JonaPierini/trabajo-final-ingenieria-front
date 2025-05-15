@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Pressable} from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {Text, StyleSheet, ScrollView, Pressable} from 'react-native';
 import {Budget, ProductItem} from '../../../infrastructure/budget.response';
 import {getBudget} from '../../../actions/budget/getBudget';
 import {Card} from '../../components/card/Card';
@@ -8,7 +8,6 @@ import {
   useFocusEffect,
   useNavigation,
 } from '@react-navigation/native';
-import {Product} from '../../../infrastructure/product.response';
 import {User} from '../../../infrastructure/user';
 import {Client} from '../../../infrastructure/client.response';
 
@@ -23,7 +22,7 @@ export type BudgetScreenParams = {
     createdAt?: string; // ISO date string
   };
   //NewBudget seria la pantalla
-  NewBudget: undefined;
+  NewBudgetScreen: undefined;
 };
 
 export const BudgetScreen = () => {
@@ -41,7 +40,9 @@ export const BudgetScreen = () => {
 
   return (
     <ScrollView style={styles.scrollView}>
-      <Pressable style={styles.newClient}>
+      <Pressable
+        style={styles.newClient}
+        onPress={() => navigation.navigate('NewBudgetScreen')}>
         <Text>Agregar nuevo</Text>
       </Pressable>
       {budget.map(item => (

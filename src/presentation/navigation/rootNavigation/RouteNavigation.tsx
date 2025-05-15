@@ -1,16 +1,19 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {HomeScreen} from '../../screen/home/HomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ProductScreen} from '../../screen/product/ProductScreen';
-import {SearchScreen} from '../../screen/search/SearchScreen';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {ClientNavigation} from '../clientNavigation/ClientNavigation';
 import {BudgetNavigation} from '../budgetNavigation/BudgetNavigation';
+import {ProductNavigation} from '../productNavigation/ProductNavigation';
+import {UserNavigation} from '../userNavigation/UserNavigation';
+import {CategoryNavigation} from '../categoryNavigation/CategoryNavigation';
 
 export type RouteNavigationParams = {
   HomeScreen: undefined;
+  UserNavigation: undefined;
   ClientNavigation: undefined;
-  ProductScreen: undefined;
+  ProductNavigation: undefined;
+  CategoryNavigation: undefined;
   BudgetNavigation: undefined;
   SearchScreen: undefined;
 };
@@ -35,27 +38,32 @@ export const RouteNavigation = () => {
           component={HomeScreen}
         />
         <Tab.Screen
+          options={{
+            title: 'User',
+            tabBarIcon: UserIcon,
+          }}
+          name="UserNavigation"
+          component={UserNavigation}
+        />
+        <Tab.Screen
           options={{title: 'Clientes', tabBarIcon: ClientIcon}}
           name="ClientNavigation"
           component={ClientNavigation}
         />
         <Tab.Screen
           options={{title: 'Productos', tabBarIcon: ProductIcon}}
-          name="ProductScreen"
-          component={ProductScreen}
+          name="ProductNavigation"
+          component={ProductNavigation}
+        />
+        <Tab.Screen
+          options={{title: 'Categoria', tabBarIcon: CategoryIcon}}
+          name="CategoryNavigation"
+          component={CategoryNavigation}
         />
         <Tab.Screen
           options={{title: 'Presupesto', tabBarIcon: BudgetIcon}}
           name="BudgetNavigation"
           component={BudgetNavigation}
-        />
-        <Tab.Screen
-          options={{
-            title: 'Buscar',
-            tabBarIcon: SearchIcon,
-          }}
-          name="SearchScreen"
-          component={SearchScreen}
         />
       </Tab.Navigator>
     </>
@@ -63,7 +71,8 @@ export const RouteNavigation = () => {
 };
 
 const HomeIcon = () => <Icon name="home" size={20} />;
+const UserIcon = () => <Icon name="user" size={20} />;
 const ClientIcon = () => <Icon name="user-circle" size={20} />;
 const ProductIcon = () => <Icon name="product-hunt" size={20} />;
+const CategoryIcon = () => <Icon name="folder" size={20} />;
 const BudgetIcon = () => <Icon name="tasks" size={20} />;
-const SearchIcon = () => <Icon name="search" size={20} />;

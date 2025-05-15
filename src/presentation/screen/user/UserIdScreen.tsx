@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-export const NewBudgetScreen = () => {
+export const UserIdScreen = () => {
   return (
     <View>
-      <Text>NewBudgetScreen</Text>
+      <Text>UserIdScreen</Text>
     </View>
   );
 };

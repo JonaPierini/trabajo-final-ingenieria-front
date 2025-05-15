@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-export const NewBudgetScreen = () => {
+export const NewCategoryScreen = () => {
   return (
     <View>
-      <Text>NewBudgetScreen</Text>
+      <Text>NewCategoryScreen</Text>
     </View>
   );
 };
