@@ -8,6 +8,7 @@ import {ProductNavigation} from '../productNavigation/ProductNavigation';
 import {UserNavigation} from '../userNavigation/UserNavigation';
 import {CategoryNavigation} from '../categoryNavigation/CategoryNavigation';
 import {SalesNavigation} from '../salesNavigation/SalesNavigation';
+import {useAuthStore} from '../../../store/auth/useAuthStore';
 
 export type RouteNavigationParams = {
   HomeScreen: undefined;
@@ -23,6 +24,7 @@ export type RouteNavigationParams = {
 const Tab = createBottomTabNavigator<RouteNavigationParams>();
 
 export const RouteNavigation = () => {
+  const {user} = useAuthStore();
   return (
     <>
       <Tab.Navigator
@@ -39,14 +41,17 @@ export const RouteNavigation = () => {
           name="HomeScreen"
           component={HomeScreen}
         />
-        <Tab.Screen
-          options={{
-            title: 'Usuarios',
-            tabBarIcon: UserIcon,
-          }}
-          name="UserNavigation"
-          component={UserNavigation}
-        />
+        {user?.rol === 'ADMIN_ROLE' && (
+          <Tab.Screen
+            options={{
+              title: 'Usuarios',
+              tabBarIcon: UserIcon,
+            }}
+            name="UserNavigation"
+            component={UserNavigation}
+          />
+        )}
+
         <Tab.Screen
           options={{title: 'Clientes', tabBarIcon: ClientIcon}}
           name="ClientNavigation"
@@ -57,16 +62,21 @@ export const RouteNavigation = () => {
           name="SalesNavigation"
           component={SalesNavigation}
         />
-        <Tab.Screen
-          options={{title: 'Productos', tabBarIcon: ProductIcon}}
-          name="ProductNavigation"
-          component={ProductNavigation}
-        />
-        <Tab.Screen
-          options={{title: 'Categoria', tabBarIcon: CategoryIcon}}
-          name="CategoryNavigation"
-          component={CategoryNavigation}
-        />
+        {user?.rol === 'ADMIN_ROLE' && (
+          <>
+            <Tab.Screen
+              options={{title: 'Productos', tabBarIcon: ProductIcon}}
+              name="ProductNavigation"
+              component={ProductNavigation}
+            />
+            <Tab.Screen
+              options={{title: 'Categoria', tabBarIcon: CategoryIcon}}
+              name="CategoryNavigation"
+              component={CategoryNavigation}
+            />
+          </>
+        )}
+
         <Tab.Screen
           options={{title: 'Presupesto', tabBarIcon: BudgetIcon}}
           name="BudgetNavigation"
