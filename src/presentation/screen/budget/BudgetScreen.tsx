@@ -8,7 +8,7 @@ import {
   useFocusEffect,
   useNavigation,
 } from '@react-navigation/native';
-import {User} from '../../../infrastructure/user';
+import {User} from '../../../infrastructure/user.response';
 import {Client} from '../../../infrastructure/client.response';
 
 export type BudgetScreenParams = {

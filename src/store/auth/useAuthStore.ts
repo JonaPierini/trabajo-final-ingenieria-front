@@ -1,7 +1,7 @@
 import {create} from 'zustand';
 import {authLogin} from '../../actions/auth/auth';
 import {StorageAdapter} from '../../config/adapter/storage-adapter';
-import {User} from '../../infrastructure/user';
+import {User} from '../../infrastructure/user.response';
 
 type State = {
   status: string;

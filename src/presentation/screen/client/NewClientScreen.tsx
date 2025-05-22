@@ -5,7 +5,6 @@ import {Card} from '../../components/card/Card';
 import {Client} from '../../../infrastructure/client.response';
 import {newClient} from '../../../actions/client/newClient';
 import {useNavigation} from '@react-navigation/native';
-import {getClient} from '../../../actions/client/getClient';
 
 export const NewClientScreen = () => {
   const navigation = useNavigation();

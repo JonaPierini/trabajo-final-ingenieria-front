@@ -1,6 +1,6 @@
 import {Client} from './client.response';
 import {Product} from './product.response';
-import {User} from './user';
+import {User} from './user.response';
 
 // Define el tipo para cada elemento del array 'product'
 export interface ProductItem {

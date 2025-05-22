@@ -1,4 +1,4 @@
-import {User} from './user';
+import {User} from './user.response';
 
 export interface AuthResponse {
   msg: string;

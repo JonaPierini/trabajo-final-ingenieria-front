@@ -9,7 +9,13 @@ export type UserStackParams = {
   //Primer Pantallas
   UserScreen: undefined;
   //Segunda Pantalla
-  UserIdScreen: {};
+  UserIdScreen: {
+    userId: string;
+    name: string;
+    email: string;
+    rol: string;
+    state: boolean;
+  };
   NewUserScreen: undefined;
 };
 
