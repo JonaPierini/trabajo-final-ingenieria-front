@@ -43,6 +43,11 @@ export const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* Titulo */}
+      <View>
+        <Text style={styles.textTitle}>SISTEMA DE VENTAS</Text>
+      </View>
+
       {/* Correo Electronico */}
       <Text style={styles.text}>Correo electrónico</Text>
       <View style={styles.searchSection}>
@@ -94,6 +99,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 20,
+  },
+  textTitle: {
+    alignSelf: 'flex-start',
+    color: '#fff',
+    fontSize: 20,
+    marginBottom: 10,
+    marginTop: 10,
   },
   text: {
     alignSelf: 'flex-start',

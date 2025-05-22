@@ -7,11 +7,13 @@ import {BudgetNavigation} from '../budgetNavigation/BudgetNavigation';
 import {ProductNavigation} from '../productNavigation/ProductNavigation';
 import {UserNavigation} from '../userNavigation/UserNavigation';
 import {CategoryNavigation} from '../categoryNavigation/CategoryNavigation';
+import {SalesNavigation} from '../salesNavigation/SalesNavigation';
 
 export type RouteNavigationParams = {
   HomeScreen: undefined;
   UserNavigation: undefined;
   ClientNavigation: undefined;
+  SalesNavigation: undefined;
   ProductNavigation: undefined;
   CategoryNavigation: undefined;
   BudgetNavigation: undefined;
@@ -39,7 +41,7 @@ export const RouteNavigation = () => {
         />
         <Tab.Screen
           options={{
-            title: 'User',
+            title: 'Usuarios',
             tabBarIcon: UserIcon,
           }}
           name="UserNavigation"
@@ -49,6 +51,11 @@ export const RouteNavigation = () => {
           options={{title: 'Clientes', tabBarIcon: ClientIcon}}
           name="ClientNavigation"
           component={ClientNavigation}
+        />
+        <Tab.Screen
+          options={{title: 'Ventas', tabBarIcon: SalesIcon}}
+          name="SalesNavigation"
+          component={SalesNavigation}
         />
         <Tab.Screen
           options={{title: 'Productos', tabBarIcon: ProductIcon}}
@@ -73,6 +80,7 @@ export const RouteNavigation = () => {
 const HomeIcon = () => <Icon name="home" size={20} />;
 const UserIcon = () => <Icon name="user" size={20} />;
 const ClientIcon = () => <Icon name="user-circle" size={20} />;
+const SalesIcon = () => <Icon name="cart-plus" size={20} />;
 const ProductIcon = () => <Icon name="product-hunt" size={20} />;
 const CategoryIcon = () => <Icon name="folder" size={20} />;
 const BudgetIcon = () => <Icon name="tasks" size={20} />;
