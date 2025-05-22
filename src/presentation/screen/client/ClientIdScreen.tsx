@@ -16,6 +16,7 @@ import {Card} from '../../components/card/Card';
 import {deleteClientById} from '../../../actions/client/deleteClientById';
 import {updateClientById} from '../../../actions/client/updateClientById';
 import {ClientStackParams} from '../../navigation/clientNavigation/ClientNavigation';
+import {Loading} from '../../components/loading/Loading';
 
 export const ClientIdScreen = () => {
   const navigation = useNavigation();
@@ -24,6 +25,7 @@ export const ClientIdScreen = () => {
     useRoute<RouteProp<ClientStackParams, 'ClientIdScreen'>>().params;
 
   const [clientId, setClientId] = useState<Client | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [up, setUp] = useState<Boolean>(false);
   const [formState, setFormState] = useState<Client>({
@@ -35,9 +37,11 @@ export const ClientIdScreen = () => {
   });
 
   useEffect(() => {
+    setLoading(true);
     getClientById(params.clientId)
       .then(elem => setClientId(elem?.clientById ?? null))
-      .catch(e => console.log(e));
+      .catch(e => console.log(e))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleDelete = () => {
@@ -80,6 +84,8 @@ export const ClientIdScreen = () => {
         Alert.alert(`${e.message}`);
       });
   };
+
+  if (loading) return <Loading />;
 
   return (
     <>

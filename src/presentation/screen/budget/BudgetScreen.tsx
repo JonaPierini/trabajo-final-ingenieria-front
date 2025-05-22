@@ -10,6 +10,7 @@ import {
 } from '@react-navigation/native';
 import {User} from '../../../infrastructure/user.response';
 import {Client} from '../../../infrastructure/client.response';
+import {Loading} from '../../components/loading/Loading';
 
 export type BudgetScreenParams = {
   //BudgetId seria la url de la pantalla
@@ -28,15 +29,21 @@ export type BudgetScreenParams = {
 export const BudgetScreen = () => {
   const [budget, setBudget] = useState<Budget[]>([]);
 
+  const [loading, setLoading] = useState<boolean>(true);
+
   const navigation = useNavigation<NavigationProp<BudgetScreenParams>>();
 
   useFocusEffect(
     useCallback(() => {
+      setLoading(true);
       getBudget()
         .then(elem => setBudget(elem?.allBudget || []))
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
+        .finally(() => setLoading(false));
     }, []),
   );
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -60,7 +67,7 @@ export const BudgetScreen = () => {
           }>
           <Card>
             <Text>User: {item.user.name}</Text>
-            <Text>Cliente: {item.client.name}</Text>
+            <Text>Cliente: {item.client?.name}</Text>
             <Text>
               Creado el: {new Date(item.createdAt!).toLocaleDateString()}
             </Text>

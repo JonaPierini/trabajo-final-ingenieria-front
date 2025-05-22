@@ -17,7 +17,7 @@ export const BudgetIdScreen = () => {
       <Card>
         <Text>Fecha: {createdAt}</Text>
         <Text>Presupuesto-Id: {budgetId}</Text>
-        <Text>Cliente: {cliente.name}</Text>
+        <Text>Cliente: {cliente?.name}</Text>
         <Text style={{fontWeight: 'bold'}}>Productos:</Text>
         {product.map((item: any) => (
           <View

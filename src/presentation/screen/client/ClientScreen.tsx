@@ -8,6 +8,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import {Card} from '../../components/card/Card';
+import {Loading} from '../../components/loading/Loading';
 
 export type ClientScreenParams = {
   ClientIdScreen: {
@@ -23,6 +24,7 @@ export type ClientScreenParams = {
 
 export const ClientScreen = () => {
   const [client, setClient] = useState<Client[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const navigation = useNavigation<NavigationProp<ClientScreenParams>>();
 
@@ -31,11 +33,15 @@ export const ClientScreen = () => {
   // useCallback: Se utiliza para evitar que la función proporcionada a useFocusEffect se cree en cada renderizado.
   useFocusEffect(
     useCallback(() => {
+      setLoading(true);
       getClient()
         .then(elem => setClient(elem?.allClient || []))
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
+        .finally(() => setLoading(false));
     }, []),
   );
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView style={styles.scrollView}>

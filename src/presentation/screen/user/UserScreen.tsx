@@ -8,6 +8,7 @@ import {Text, StyleSheet, ScrollView, Pressable} from 'react-native';
 import {User} from '../../../infrastructure/user.response';
 import {getUser} from '../../../actions/user/getUser';
 import {Card} from '../../components/card/Card';
+import {Loading} from '../../components/loading/Loading';
 
 export type UserScreenParams = {
   UserIdScreen: {
@@ -27,15 +28,20 @@ export const UserScreen = () => {
 
   //Agregar nuevo vas a navegar a NewUserScreen y vas a poder crear un nuevo usuario con un rol determinado
   const [user, setUser] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigation = useNavigation<NavigationProp<UserScreenParams>>();
 
   useFocusEffect(
     useCallback(() => {
+      setLoading(true);
       getUser()
         .then(elem => setUser(elem?.allUser || []))
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
+        .finally(() => setLoading(false));
     }, []),
   );
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView style={styles.scrollView}>

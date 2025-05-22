@@ -15,6 +15,7 @@ import {getUserById} from '../../../actions/user/getUserById';
 import {BackButton} from '../../components/backButton/BackButton';
 import {Card} from '../../components/card/Card';
 import {useAuthStore} from '../../../store/auth/useAuthStore';
+import {Loading} from '../../components/loading/Loading';
 
 export const UserIdScreen = () => {
   const navigation = useNavigation();
@@ -25,7 +26,10 @@ export const UserIdScreen = () => {
 
   const [userId, setUserId] = useState<User | null>(null);
 
+  const [loading, setLoading] = useState<boolean>(true);
+
   const [up, setUp] = useState<Boolean>(false);
+
   const [formState, setFormState] = useState<User>({
     name: params.name,
     email: params.email,
@@ -36,9 +40,11 @@ export const UserIdScreen = () => {
   const isSelfUser = user?.email === userId?.email;
 
   useEffect(() => {
+    setLoading(true);
     getUserById(params.userId)
       .then(elem => setUserId(elem?.userById ?? null))
-      .catch(e => console.log(e));
+      .catch(e => console.log(e))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleDelete = () => {
@@ -52,6 +58,8 @@ export const UserIdScreen = () => {
   const handleConfirm = () => {
     console.log('Confirmar');
   };
+
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -123,6 +131,11 @@ export const UserIdScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   btnContainer: {
     display: 'flex',
     flexDirection: 'row',
