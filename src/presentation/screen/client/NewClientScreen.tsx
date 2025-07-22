@@ -18,23 +18,16 @@ export const NewClientScreen = () => {
 
   const handleNewClient = () => {
     newClient(formState)
-      .then(() => setFormState(formState))
       .then(() => {
-        Alert.alert(
-          'Cliente creado con éxito', // Título del Alert
-          '', // Mensaje del Alert (puedes dejarlo vacío)
-          [
-            {
-              text: 'OK', // Texto del botón
-              onPress: () => navigation.goBack(), // Acción al presionar OK
-            },
-          ],
-        );
+        Alert.alert('Cliente creado con éxito', '', [
+          {text: 'OK', onPress: () => navigation.goBack()},
+        ]);
       })
       .catch(e => {
-        Alert.alert(`${e.message}`);
+        Alert.alert('Error', e.message);
       });
   };
+
   return (
     <View>
       <BackButton />

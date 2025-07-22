@@ -16,7 +16,7 @@ export type UserScreenParams = {
     name: string;
     email: string;
     rol: string;
-    state: boolean;
+    state?: boolean;
   };
   NewUserScreen: undefined;
 };

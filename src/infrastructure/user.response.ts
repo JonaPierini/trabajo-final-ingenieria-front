@@ -4,7 +4,7 @@ export interface User {
   email: string;
   password?: string;
   rol: string;
-  state: boolean;
+  state?: boolean;
   createdAt?: string; // ISO date string
   __v?: number;
 }
