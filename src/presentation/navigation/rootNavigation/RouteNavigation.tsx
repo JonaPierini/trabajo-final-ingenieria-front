@@ -88,8 +88,8 @@ export const RouteNavigation = () => {
 };
 
 const HomeIcon = () => <Icon name="home" size={20} />;
-const UserIcon = () => <Icon name="user" size={20} />;
-const ClientIcon = () => <Icon name="user-circle" size={20} />;
+const UserIcon = () => <Icon name="users" size={20} />;
+const ClientIcon = () => <Icon name="user-plus" size={20} />;
 const SalesIcon = () => <Icon name="cart-plus" size={20} />;
 const ProductIcon = () => <Icon name="product-hunt" size={20} />;
 const CategoryIcon = () => <Icon name="folder" size={20} />;

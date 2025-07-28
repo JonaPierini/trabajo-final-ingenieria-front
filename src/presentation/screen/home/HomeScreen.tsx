@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useAuthStore} from '../../../store/auth/useAuthStore';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const HomeScreen = () => {
   const {logout, user} = useAuthStore();
@@ -18,6 +19,7 @@ export const HomeScreen = () => {
 
       <View style={styles.centerContent}>
         <Text style={styles.welcomeText}>Bienvenido {user?.name}</Text>
+        <Icon name={'user-circle'} size={150} />
       </View>
     </View>
   );
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   welcomeText: {
+    marginBottom: 15,
     fontSize: 16,
     textAlign: 'center',
   },

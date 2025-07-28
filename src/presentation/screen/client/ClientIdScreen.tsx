@@ -101,9 +101,10 @@ export const ClientIdScreen = () => {
             />
             <TextInput
               placeholder={clientId?.email}
-              style={{color: 'tomato'}}
+              style={{color: '#ccc'}}
               value={formState.email}
               onChangeText={email => setFormState({...formState, email})}
+              readOnly
             />
             <TextInput
               placeholder={clientId?.address}

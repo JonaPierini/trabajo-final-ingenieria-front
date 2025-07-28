@@ -8,6 +8,7 @@ import {
   Button,
   Pressable,
   Switch,
+  Alert,
 } from 'react-native';
 import {UserStackParams} from '../../navigation/userNavigation/UserNavigation';
 import {User} from '../../../infrastructure/user.response';
@@ -16,6 +17,7 @@ import {BackButton} from '../../components/backButton/BackButton';
 import {Card} from '../../components/card/Card';
 import {useAuthStore} from '../../../store/auth/useAuthStore';
 import {Loading} from '../../components/loading/Loading';
+import {deleteUserById} from '../../../actions/user/deleteUserById';
 
 export const UserIdScreen = () => {
   const navigation = useNavigation();
@@ -48,7 +50,21 @@ export const UserIdScreen = () => {
   }, []);
 
   const handleDelete = () => {
-    console.log('Borrar');
+    deleteUserById(params.userId)
+      .then(() => setUserId(null))
+      .then(() => {
+        Alert.alert(
+          'Usuario borrado con éxito', // Título del Alert
+          '', // Mensaje del Alert (puedes dejarlo vacío)
+          [
+            {
+              text: 'OK', // Texto del botón
+              onPress: () => navigation.goBack(), // Acción al presionar OK
+            },
+          ],
+        );
+      })
+      .catch(e => console.log(e));
   };
 
   const handleEdit = () => {
@@ -107,10 +123,13 @@ export const UserIdScreen = () => {
       </Card>
       <View style={styles.btnContainer}>
         <Pressable
-          disabled={isSelfUser}
+          disabled={isSelfUser || userId?.state === false}
           style={[
             styles.btn,
-            {backgroundColor: isSelfUser ? '#ccc' : '#f23939'},
+            {
+              backgroundColor:
+                isSelfUser || userId?.state === false ? '#ccc' : '#f23939',
+            },
           ]}
           onPress={handleDelete}>
           <Text style={styles.text}>Eliminar</Text>

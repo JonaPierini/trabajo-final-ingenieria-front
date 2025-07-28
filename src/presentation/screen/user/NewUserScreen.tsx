@@ -1,10 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {View, Button, Alert, TextInput} from 'react-native';
+import {View, Button, Alert, TextInput, Text, StyleSheet} from 'react-native';
 import {User} from '../../../infrastructure/user.response';
 import {newUser} from '../../../actions/user/newUser';
 import {BackButton} from '../../components/backButton/BackButton';
 import {Card} from '../../components/card/Card';
+import {Picker} from '@react-native-picker/picker';
 
 export const NewUserScreen = () => {
   // Creacion de Usuarios con asignacion de Rol
@@ -13,14 +14,14 @@ export const NewUserScreen = () => {
     name: '',
     email: '',
     password: '',
-    rol: '',
+    rol: 'USER_ROLE',
     state: true,
   });
 
   const handleNewUser = () => {
     newUser(formState)
       .then(() => {
-        Alert.alert('Cliente creado con éxito', '', [
+        Alert.alert('Usuario creado con éxito', '', [
           {text: 'OK', onPress: () => navigation.goBack()},
         ]);
       })
@@ -45,17 +46,32 @@ export const NewUserScreen = () => {
             onChangeText={email => setFormState({...formState, email})}
           />
           <TextInput
-            placeholder="Rol"
-            value={formState.rol}
-            onChangeText={rol => setFormState({...formState, rol})}
+            placeholder="Contraseña"
+            value={formState.password}
+            onChangeText={password => setFormState({...formState, password})}
           />
+          <Text style={{marginTop: 1, color: '#ccc'}}>Rol:</Text>
+          <Picker
+            style={{
+              borderColor: '#ccc',
+              borderWidth: 1,
+              borderRadius: 8,
+              marginTop: 5,
+            }}
+            selectedValue={formState.rol}
+            onValueChange={itemValue =>
+              setFormState({...formState, rol: itemValue})
+            }
+            dropdownIconColor="#000">
+            <Picker.Item label="Admin" value="ADMIN_ROLE" />
+            <Picker.Item label="User" value="USER_ROLE" />
+          </Picker>
+
           <Button
             title="Confirmar"
             onPress={handleNewUser}
             disabled={
-              formState.name.length === 0 ||
-              formState.email.length === 0 ||
-              formState.rol.length === 0
+              formState.name.length === 0 || formState.email.length === 0
             }></Button>
         </Card>
       </>

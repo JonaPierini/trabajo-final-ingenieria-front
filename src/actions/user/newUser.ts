@@ -2,12 +2,13 @@ import {AxiosError} from 'axios';
 import {salesApi} from '../../config/api/selesApi';
 import {ApiResponseNewUser, User} from '../../infrastructure/user.response';
 
-export const newUser = async (usertData: User) => {
+export const newUser = async (userData: User) => {
   try {
     const response = await salesApi.post<ApiResponseNewUser>(
       `newUser`,
-      usertData, // Aquí pasamos el cuerpo de la solicitud
+      userData, // Aquí pasamos el cuerpo de la solicitud
     );
+
     return response.data;
   } catch (error) {
     if (
