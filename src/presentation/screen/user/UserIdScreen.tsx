@@ -19,6 +19,7 @@ import {useAuthStore} from '../../../store/auth/useAuthStore';
 import {Loading} from '../../components/loading/Loading';
 import {deleteUserById} from '../../../actions/user/deleteUserById';
 import {updateUserById} from '../../../actions/user/updateUserById';
+import {Picker} from '@react-native-picker/picker';
 
 export const UserIdScreen = () => {
   const navigation = useNavigation();
@@ -111,19 +112,40 @@ export const UserIdScreen = () => {
               value={formState.email}
               onChangeText={email => setFormState({...formState, email})}
             />
-            <TextInput
-              placeholder={userId?.rol}
-              style={{color: 'tomato'}}
-              value={formState.rol}
-              onChangeText={rol => setFormState({...formState, rol})}
-            />
-            <Switch
-              value={formState.state}
-              onValueChange={value =>
-                setFormState({...formState, state: value})
+            <Text style={{marginTop: 1, color: '#ccc'}}>Rol:</Text>
+            <Picker
+              style={{
+                borderColor: '#ccc',
+                borderWidth: 1,
+                borderRadius: 8,
+                marginTop: 5,
+                marginBottom: 5,
+              }}
+              selectedValue={formState.rol}
+              onValueChange={itemValue =>
+                setFormState({...formState, rol: itemValue})
               }
-            />
-            <Text>{formState.state ? 'Activo' : 'Inactivo'}</Text>
+              dropdownIconColor="#000">
+              <Picker.Item label="Admin" value="ADMIN_ROLE" />
+              <Picker.Item label="User" value="USER_ROLE" />
+            </Picker>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: '#ccc'}}>Estado:</Text>
+              <Text style={{marginRight: 5, marginLeft: 5}}>
+                {formState.state ? 'Activo' : 'Inactivo'}
+              </Text>
+              <Switch
+                value={formState.state}
+                onValueChange={value =>
+                  setFormState({...formState, state: value})
+                }
+              />
+            </View>
+
             <Button title="Confirmar" onPress={handleConfirm}></Button>
           </>
         ) : (
