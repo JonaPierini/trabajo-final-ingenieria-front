@@ -13,7 +13,7 @@ import {getClientById} from '../../../actions/client/getClientById';
 import {Client} from '../../../infrastructure/client.response';
 import {BackButton} from '../../components/backButton/BackButton';
 import {Card} from '../../components/card/Card';
-import {deleteClientById} from '../../../actions/client/deleteClientById';
+import {deleteClientDB} from '../../../actions/client/deleteClientById';
 import {updateClientById} from '../../../actions/client/updateClientById';
 import {ClientStackParams} from '../../navigation/clientNavigation/ClientNavigation';
 import {Loading} from '../../components/loading/Loading';
@@ -45,8 +45,8 @@ export const ClientIdScreen = () => {
   }, []);
 
   const handleDelete = () => {
-    deleteClientById(params.clientId)
-      .then(() => setClientId(null))
+    deleteClientDB(params.clientId)
+      //      .then(() => setClientId(null))
       .then(() => {
         Alert.alert(
           'Cliente borrado con éxito', // Título del Alert

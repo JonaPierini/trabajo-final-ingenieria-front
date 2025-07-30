@@ -18,6 +18,7 @@ import {Card} from '../../components/card/Card';
 import {useAuthStore} from '../../../store/auth/useAuthStore';
 import {Loading} from '../../components/loading/Loading';
 import {deleteUserById} from '../../../actions/user/deleteUserById';
+import {updateUserById} from '../../../actions/user/updateUserById';
 
 export const UserIdScreen = () => {
   const navigation = useNavigation();
@@ -51,11 +52,11 @@ export const UserIdScreen = () => {
 
   const handleDelete = () => {
     deleteUserById(params.userId)
-      .then(() => setUserId(null))
+      //      .then(() => setUserId(null))
       .then(() => {
         Alert.alert(
           'Usuario borrado con éxito', // Título del Alert
-          '', // Mensaje del Alert (puedes dejarlo vacío)
+          '', // Mensaje del Alert
           [
             {
               text: 'OK', // Texto del botón
@@ -72,7 +73,22 @@ export const UserIdScreen = () => {
   };
 
   const handleConfirm = () => {
-    console.log('Confirmar');
+    updateUserById(params.userId, formState) // Envía el ID y los datos actualizados
+      .then(() => {
+        {
+          setUserId(formState); // Actualiza el estado local con los nuevos valores
+          Alert.alert('Usuario actualizado con exito', '', [
+            {
+              text: 'OK',
+              onPress: () => navigation.goBack(),
+            },
+          ]);
+          setUp(false); // Sale del modo edición
+        }
+      })
+      .catch(e => {
+        Alert.alert(`${e.message}`);
+      });
   };
 
   if (loading) return <Loading />;
