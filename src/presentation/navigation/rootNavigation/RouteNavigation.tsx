@@ -1,6 +1,5 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {HomeScreen} from '../../screen/home/HomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ClientNavigation} from '../clientNavigation/ClientNavigation';
 import {BudgetNavigation} from '../budgetNavigation/BudgetNavigation';
@@ -9,9 +8,10 @@ import {UserNavigation} from '../userNavigation/UserNavigation';
 import {CategoryNavigation} from '../categoryNavigation/CategoryNavigation';
 import {SalesNavigation} from '../salesNavigation/SalesNavigation';
 import {useAuthStore} from '../../../store/auth/useAuthStore';
+import {HomeUserNavigation} from '../homeUserNavigation/HomeUserNavigation';
 
 export type RouteNavigationParams = {
-  HomeScreen: undefined;
+  HomeNavigation: undefined;
   UserNavigation: undefined;
   ClientNavigation: undefined;
   SalesNavigation: undefined;
@@ -38,8 +38,8 @@ export const RouteNavigation = () => {
             title: 'Home',
             tabBarIcon: HomeIcon,
           }}
-          name="HomeScreen"
-          component={HomeScreen}
+          name="HomeNavigation"
+          component={HomeUserNavigation}
         />
         {user?.rol === 'ADMIN_ROLE' && (
           <Tab.Screen

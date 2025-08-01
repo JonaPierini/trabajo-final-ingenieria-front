@@ -12,6 +12,7 @@ type State = {
 type Action = {
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  setUser: (user: User) => void; // 🔁 NUEVA acción
 };
 
 const initialState: State = {
@@ -42,4 +43,5 @@ export const useAuthStore = create<State & Action>()(set => ({
     await StorageAdapter.removeItem('token');
     set(initialState);
   },
+  setUser: (user: User) => set(state => ({...state, user})), // ✅ NUEVO
 }));

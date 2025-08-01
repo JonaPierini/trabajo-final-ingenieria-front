@@ -1,10 +1,12 @@
-import React from 'react';
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useAuthStore} from '../../../store/auth/useAuthStore';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {HomeUserStackParams} from '../../navigation/homeUserNavigation/HomeUserNavigation';
 
-export const HomeScreen = () => {
+export const HomeScreenUser = () => {
   const {logout, user} = useAuthStore();
+  const navigation = useNavigation<NavigationProp<HomeUserStackParams>>();
 
   return (
     <View style={styles.container}>
@@ -17,10 +19,21 @@ export const HomeScreen = () => {
         </Pressable>
       </View>
 
-      <View style={styles.centerContent}>
+      <Pressable
+        style={styles.centerContent}
+        onPress={() =>
+          navigation.navigate('HomeScreenUserId', {
+            userId: user?._id ?? '',
+            name: user?.name ?? '',
+            email: user?.email ?? '',
+            rol: user?.rol ?? '',
+            state: user?.state ?? false,
+            password: user?.password ?? '',
+          })
+        }>
         <Text style={styles.welcomeText}>Bienvenido {user?.name}</Text>
         <Icon name={'user-circle'} size={150} />
-      </View>
+      </Pressable>
     </View>
   );
 };
