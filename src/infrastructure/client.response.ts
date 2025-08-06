@@ -5,6 +5,7 @@ export interface Client {
   address: string;
   location: string;
   provinces: string;
+  state: boolean;
   createdAt?: string; // ISO date string
   __v?: number;
 }

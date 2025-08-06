@@ -8,15 +8,16 @@ import {
   StyleSheet,
   Alert,
   TextInput,
+  Switch,
 } from 'react-native';
 import {getClientById} from '../../../actions/client/getClientById';
 import {Client} from '../../../infrastructure/client.response';
 import {BackButton} from '../../components/backButton/BackButton';
 import {Card} from '../../components/card/Card';
-import {deleteClientDB} from '../../../actions/client/deleteClientById';
 import {updateClientById} from '../../../actions/client/updateClientById';
 import {ClientStackParams} from '../../navigation/clientNavigation/ClientNavigation';
 import {Loading} from '../../components/loading/Loading';
+import {deleteClientById} from '../../../actions/client/deleteClientById';
 
 export const ClientIdScreen = () => {
   const navigation = useNavigation();
@@ -34,6 +35,7 @@ export const ClientIdScreen = () => {
     address: params.address,
     location: params.location,
     provinces: params.provinces,
+    state: params.state,
   });
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export const ClientIdScreen = () => {
   }, []);
 
   const handleDelete = () => {
-    deleteClientDB(params.clientId)
+    deleteClientById(params.clientId)
       //      .then(() => setClientId(null))
       .then(() => {
         Alert.alert(
@@ -100,11 +102,11 @@ export const ClientIdScreen = () => {
               onChangeText={name => setFormState({...formState, name})}
             />
             <TextInput
+              autoCapitalize={'none'}
               placeholder={clientId?.email}
-              style={{color: '#ccc'}}
+              style={{color: 'tomato'}}
               value={formState.email}
               onChangeText={email => setFormState({...formState, email})}
-              readOnly
             />
             <TextInput
               placeholder={clientId?.address}
@@ -126,6 +128,22 @@ export const ClientIdScreen = () => {
                 setFormState({...formState, provinces})
               }
             />
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: '#ccc'}}>Estado:</Text>
+              <Text style={{marginRight: 5, marginLeft: 5}}>
+                {formState.state ? 'Activo' : 'Inactivo'}
+              </Text>
+              <Switch
+                value={formState.state}
+                onValueChange={value =>
+                  setFormState({...formState, state: value})
+                }
+              />
+            </View>
             <Button title="Confirmar" onPress={handleConfirm}></Button>
           </>
         ) : (
@@ -135,12 +153,19 @@ export const ClientIdScreen = () => {
             <Text>Dirección: {clientId?.address}</Text>
             <Text>Localidad: {clientId?.location}</Text>
             <Text>Provincia: {clientId?.provinces}</Text>
+            <Text style={{color: clientId?.state ? 'green' : 'red'}}>
+              Estado: {clientId?.state ? 'Activo' : 'Inactivo'}
+            </Text>
           </>
         )}
       </Card>
       <View style={styles.btnContainer}>
         <Pressable
-          style={[styles.btn, {backgroundColor: '#f23939'}]}
+          disabled={clientId?.state === false}
+          style={[
+            styles.btn,
+            {backgroundColor: clientId?.state ? '#f23939' : '#ccc'},
+          ]}
           onPress={handleDelete}>
           <Text style={styles.text}>Eliminar</Text>
         </Pressable>

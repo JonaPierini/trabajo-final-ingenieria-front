@@ -16,6 +16,7 @@ export type ClientStackParams = {
     address: string;
     location: string;
     provinces: string;
+    state: boolean;
   };
   NewClientScreen: undefined;
 };

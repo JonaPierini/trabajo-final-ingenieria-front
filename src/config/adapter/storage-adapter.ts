@@ -19,7 +19,6 @@ export class StorageAdapter {
     try {
       await AsyncStorage.removeItem(key);
     } catch (error) {
-      console.log(error);
       throw new Error(`Error removing item ${key}`);
     }
   }

@@ -14,6 +14,7 @@ export const NewClientScreen = () => {
     address: '',
     location: '',
     provinces: '',
+    state: true,
   });
 
   const handleNewClient = () => {

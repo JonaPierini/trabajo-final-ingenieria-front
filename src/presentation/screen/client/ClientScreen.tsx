@@ -69,6 +69,10 @@ export const ClientScreen = () => {
             <Text>Dirección: {item.address}</Text>
             <Text>Localidad: {item.location}</Text>
             <Text>Provincia: {item.provinces}</Text>
+            <Text style={{color: item.state ? 'green' : 'red'}}>
+              Estado: {item.state ? 'Activo' : 'Inactivo'}
+            </Text>
+
             <Text>
               Creado el: {new Date(item.createdAt!).toLocaleDateString()}
             </Text>

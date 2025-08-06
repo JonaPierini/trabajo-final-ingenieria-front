@@ -47,7 +47,6 @@ export const HomeScreenUserId = () => {
         {
           setFormState(cleanFormState); // Actualiza el estado local con los nuevos valores
           setUser(cleanFormState); // 🔁 actualiza el nombre en el store
-          console.log(cleanFormState);
           Alert.alert('Usuario actualizado con exito', '', [
             {
               text: 'OK',

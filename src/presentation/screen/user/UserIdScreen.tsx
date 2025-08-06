@@ -39,6 +39,7 @@ export const UserIdScreen = () => {
     email: params.email,
     rol: params.rol,
     state: params.state,
+    password: '',
   });
 
   const isSelfUser = user?.email === userId?.email;
@@ -107,6 +108,7 @@ export const UserIdScreen = () => {
               onChangeText={name => setFormState({...formState, name})}
             />
             <TextInput
+              autoCapitalize="none"
               placeholder={userId?.email}
               style={{color: 'tomato'}}
               value={formState.email}

@@ -40,7 +40,6 @@ export const updateSelfUserById = async (
       `patchUser/${id}`,
       userData, // Aquí pasamos el cuerpo de la solicitud
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
