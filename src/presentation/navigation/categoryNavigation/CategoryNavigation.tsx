@@ -9,7 +9,9 @@ export type CategoryStackParams = {
   //Primer Pantallas
   CategoryScreen: undefined;
   //Segunda Pantalla
-  CategoryIdScreen: {};
+  CategoryIdScreen: {
+    categoryId: string;
+  };
   NewCategoryScreen: undefined;
 };
 

@@ -18,6 +18,7 @@ export type ClientScreenParams = {
     address: string;
     location: string;
     provinces: string;
+    state: boolean;
   };
   NewClientScreen: undefined;
 };
@@ -61,6 +62,7 @@ export const ClientScreen = () => {
               address: item.address,
               location: item.location,
               provinces: item.provinces,
+              state: item.state,
             })
           }>
           <Card>
