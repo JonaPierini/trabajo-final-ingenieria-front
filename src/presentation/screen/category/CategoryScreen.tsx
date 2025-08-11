@@ -12,7 +12,7 @@ import {Card} from '../../components/card/Card';
 
 export type CategoryScreenParams = {
   CategoryIdScreen: {
-    categoryId: string;
+    categoryId?: string;
   };
   NewCategoryScreen: undefined;
 };

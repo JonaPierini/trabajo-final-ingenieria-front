@@ -1,24 +1,42 @@
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Pressable, Switch, Button} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Switch,
+  Button,
+  Alert,
+  TextInput,
+} from 'react-native';
 import {CategoryStackParams} from '../../navigation/categoryNavigation/CategoryNavigation';
 import {Category} from '../../../infrastructure/category.response';
 import {getCategoryById} from '../../../actions/category/getCategoryById';
 import {BackButton} from '../../components/backButton/BackButton';
 import {Card} from '../../components/card/Card';
-import {TextInput} from 'react-native-gesture-handler';
+
 import {Loading} from '../../components/loading/Loading';
+import {deleteCategoryById} from '../../../actions/category/deleteUserById';
+import {updateCategoryById} from '../../../actions/category/updateCategoryById';
 
 export const CategoryIdScreen = () => {
   const navigation = useNavigation();
 
   const params =
     useRoute<RouteProp<CategoryStackParams, 'CategoryIdScreen'>>().params;
-  const [categoryId, setCategoryId] = useState<Category | null>(null);
+  const [categoryId, setCategoryId] = useState<Category>();
   const [loading, setLoading] = useState<boolean>(true);
 
   const [up, setUp] = useState<Boolean>(false);
-  const [formState, setFormState] = useState<Category | null>(null);
+  const [formState, setFormState] = useState<Category>({
+    name: '',
+    user: {
+      _id: '',
+      name: '',
+    },
+    state: true,
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -39,18 +57,45 @@ export const CategoryIdScreen = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  console.log(categoryId);
-
   const handleDelete = () => {
-    console.log('Delete');
+    deleteCategoryById(params.categoryId)
+      //      .then(() => setUserId(null))
+      .then(() => {
+        Alert.alert(
+          'Categoria borrada con éxito', // Título del Alert
+          '', // Mensaje del Alert
+          [
+            {
+              text: 'OK', // Texto del botón
+              onPress: () => navigation.goBack(), // Acción al presionar OK
+            },
+          ],
+        );
+      })
+      .catch(e => console.log(e));
   };
 
   const handleEdit = () => {
-    console.log('Edit');
+    setUp(prev => !prev);
   };
 
   const handleConfirm = () => {
-    console.log('Edit');
+    updateCategoryById(params.categoryId, formState) // Envía el ID y los datos actualizados
+      .then(() => {
+        {
+          setCategoryId(formState); // Actualiza el estado local con los nuevos valores
+          Alert.alert('Categoria actualizado con exito', '', [
+            {
+              text: 'OK',
+              onPress: () => navigation.goBack(),
+            },
+          ]);
+          setUp(false); // Sale del modo edición
+        }
+      })
+      .catch(e => {
+        Alert.alert(`${e.message}`);
+      });
   };
 
   if (loading) return <Loading />;
@@ -64,7 +109,9 @@ export const CategoryIdScreen = () => {
             <TextInput
               placeholder={categoryId?.name}
               value={formState?.name}
-              onChangeText={name => setFormState({...formState!, name})}
+              onChangeText={name =>
+                setFormState(prev => (prev ? {...prev, name: name} : prev))
+              }
             />
             <View
               style={{
@@ -76,9 +123,9 @@ export const CategoryIdScreen = () => {
                 {formState?.state ? 'Activo' : 'Inactivo'}
               </Text>
               <Switch
-                value={formState?.state}
-                onValueChange={value =>
-                  setFormState({...formState!, state: value})
+                value={formState.state}
+                onValueChange={state =>
+                  setFormState(prev => (prev ? {...prev, state: state} : prev))
                 }
               />
             </View>
@@ -87,6 +134,7 @@ export const CategoryIdScreen = () => {
         ) : (
           <>
             <Text>Nombre: {categoryId?.name}</Text>
+            <Text>Creador: {categoryId?.user?.name}</Text>
             <Text style={{color: categoryId?.state ? 'green' : 'red'}}>
               Estado: {categoryId?.state ? 'Activo' : 'Inactivo'}
             </Text>
