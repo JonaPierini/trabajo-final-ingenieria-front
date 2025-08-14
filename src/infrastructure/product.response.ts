@@ -16,3 +16,20 @@ export interface Product {
   createdAt?: string; // ISO date string
   __v?: number;
 }
+
+// GET /product
+export interface ApiResponseProduct {
+  msg: string;
+  total: number;
+  allProduct: Product[] | [];
+}
+
+// Lo que ENVIÁS al crear
+export type ProductCreatePayload = {
+  name: string;
+  state: boolean;
+  value: number;
+  stock: number;
+  description: string;
+  category: string;
+};
