@@ -37,6 +37,7 @@ export const ProductScreen = () => {
         <Pressable key={item._id} onPress={() => console.log('Navegar al id')}>
           <Card>
             <Text>Nombre: {item.name}</Text>
+            <Text>Descripción: {item.description}</Text>
             <Text>Categoria: {item.category.name}</Text>
             <Text>Precio: {item.value}</Text>
             <Text>Stock: {item.stock}</Text>

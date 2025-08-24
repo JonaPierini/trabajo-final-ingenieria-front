@@ -33,3 +33,8 @@ export type ProductCreatePayload = {
   description: string;
   category: string;
 };
+
+export interface ApiResponseNewProduct {
+  msg: string;
+  product: Product;
+}

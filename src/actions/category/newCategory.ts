@@ -2,7 +2,6 @@ import axios from 'axios';
 import {salesApi} from '../../config/api/selesApi';
 import {
   ApiResponseNewCategory,
-  Category,
   CategoryCreatePayload,
 } from '../../infrastructure/category.response';
 
