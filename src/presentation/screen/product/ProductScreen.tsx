@@ -10,10 +10,30 @@ import {Product} from '../../../infrastructure/product.response';
 import {Loading} from '../../components/loading/Loading';
 import {getProduct} from '../../../actions/product/getProduct';
 
+export type ProductScreenParams = {
+  ProductIdScreen: {
+    productId?: string;
+    name: string;
+    description: string;
+    category: {
+      _id: string;
+      name: string;
+    };
+    user: {
+      _id: string;
+      name: string;
+    };
+    value: number;
+    stock: number;
+    state: boolean;
+  };
+  NewProductScreen: undefined;
+};
+
 export const ProductScreen = () => {
   const [product, setProduct] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useNavigation<NavigationProp<ProductScreenParams>>();
 
   useFocusEffect(
     useCallback(() => {
@@ -34,10 +54,28 @@ export const ProductScreen = () => {
         <Text>Agregar nuevo</Text>
       </Pressable>
       {product.map(item => (
-        <Pressable key={item._id} onPress={() => console.log('Navegar al id')}>
+        <Pressable
+          key={item._id}
+          onPress={() =>
+            navigation.navigate('ProductIdScreen', {
+              productId: item._id,
+              name: item.name,
+              description: item.description,
+              category: {
+                _id: item.category._id,
+                name: item.category.name,
+              },
+              user: {
+                _id: item.user._id,
+                name: item.user.name,
+              },
+              value: item.value,
+              stock: item.stock,
+              state: item.state,
+            })
+          }>
           <Card>
             <Text>Nombre: {item.name}</Text>
-            <Text>Descripción: {item.description}</Text>
             <Text>Categoria: {item.category.name}</Text>
             <Text>Precio: {item.value}</Text>
             <Text>Stock: {item.stock}</Text>

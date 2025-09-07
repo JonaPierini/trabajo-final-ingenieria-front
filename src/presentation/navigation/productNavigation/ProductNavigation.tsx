@@ -9,7 +9,22 @@ export type ProductStackParams = {
   //Primer Pantallas
   ProductScreen: undefined;
   //Segunda Pantalla
-  ProductIdScreen: {};
+  ProductIdScreen: {
+    productId: string;
+    name: string;
+    description: string;
+    category: {
+      _id: string;
+      name: string;
+    };
+    user: {
+      _id: string;
+      name: string;
+    };
+    value: number;
+    stock: number;
+    state: boolean;
+  };
   NewProductScreen: undefined;
 };
 

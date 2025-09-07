@@ -78,7 +78,7 @@ export const NewProductScreen = () => {
             onChangeText={name => setFormState({...formState, name})}
           />
           <View>
-            <Text style={styles.label}>value:</Text>
+            <Text style={styles.label}>Valor:</Text>
             <TouchableOpacity
               style={styles.btn}
               onPress={() =>

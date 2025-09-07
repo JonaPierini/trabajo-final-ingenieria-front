@@ -38,3 +38,17 @@ export interface ApiResponseNewProduct {
   msg: string;
   product: Product;
 }
+
+// GET /productById
+export interface ApiResponseProductById {
+  msg: string;
+  productById: Product;
+}
+
+// DELETE // productById
+export interface ApiResponseDeleteProductById {
+  msg: string;
+  product: Product;
+}
+
+export type ApiResponseUpdateProductById = Partial<ProductCreatePayload>;
