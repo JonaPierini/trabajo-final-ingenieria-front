@@ -26,3 +26,34 @@ export interface ApiResponseBudget {
   msg: string;
   allBudget: Budget[] | [];
 }
+
+// Lo que ENVIÁS al crear
+// Un ítem dentro del array product
+export type ProductBudget = {
+  productId: string;
+  quantity: number;
+};
+
+// Payload para crear presupuesto
+export type BudgetCreatePayload = {
+  client: string;
+  product: ProductBudget[]; // 👈 array,
+  state: boolean;
+};
+
+export interface ApiResponseNewBudget {
+  msg: string;
+  newBudget: Budget;
+}
+
+// DELETE // budgetById
+export interface ApiResponseDeleteBudgetById {
+  msg: string;
+  budget: Budget;
+}
+
+// GETBYID // budgetById
+export interface ApiResponseBudgetById {
+  msg: string;
+  budgetById: Budget;
+}
