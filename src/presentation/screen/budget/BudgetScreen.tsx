@@ -19,6 +19,7 @@ export type BudgetScreenParams = {
     user: User;
     cliente: Client;
     product: ProductItem[];
+    state: boolean;
     total: number;
     createdAt?: string; // ISO date string
   };
@@ -61,6 +62,7 @@ export const BudgetScreen = () => {
               user: item.user,
               cliente: item.client,
               product: item.product, // Esto es un array de objetos con productId y quantity
+              state: item.state,
               total: item.total,
               createdAt: item.createdAt, // ISO date string
             })
@@ -68,6 +70,9 @@ export const BudgetScreen = () => {
           <Card>
             <Text>User: {item.user.name}</Text>
             <Text>Cliente: {item.client?.name}</Text>
+            <Text style={{color: item?.state ? 'green' : 'red'}}>
+              Estado: {item?.state ? 'Activo' : 'Inactivo'}
+            </Text>
             <Text>
               Creado el: {new Date(item.createdAt!).toLocaleDateString()}
             </Text>

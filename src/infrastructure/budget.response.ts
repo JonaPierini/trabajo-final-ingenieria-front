@@ -15,6 +15,7 @@ export interface Budget {
   user: User;
   client: Client;
   product: ProductItem[]; // Ahora es un array de ProductItem
+  state: boolean;
   total: number;
   createdAt?: string; // ISO date string
   __v?: number;

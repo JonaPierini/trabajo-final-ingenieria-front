@@ -9,7 +9,7 @@ export const BudgetIdScreen = () => {
   const params =
     useRoute<RouteProp<BudgetStackParams, 'BudgetIdScreen'>>().params;
 
-  const {budgetId, user, cliente, product, total, createdAt} = params;
+  const {budgetId, user, cliente, product, total, state, createdAt} = params;
 
   return (
     <>
@@ -31,6 +31,9 @@ export const BudgetIdScreen = () => {
         ))}
         <Text>Total: {total}</Text>
         <Text>Responsable: {user.name}</Text>
+        <Text style={{color: state ? 'green' : 'red'}}>
+          Estado: {state ? 'Activo' : 'Inactivo'}
+        </Text>
       </Card>
       <View style={styles.btnContainer}>
         <Pressable

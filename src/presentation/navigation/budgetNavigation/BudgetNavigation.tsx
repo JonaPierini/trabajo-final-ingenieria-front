@@ -17,6 +17,7 @@ export type BudgetStackParams = {
     user: User;
     cliente: Client;
     product: Product[];
+    state: boolean;
     total: number;
     createdAt?: string; // ISO date string
   };
