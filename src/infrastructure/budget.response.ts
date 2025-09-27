@@ -57,3 +57,17 @@ export interface ApiResponseBudgetById {
   msg: string;
   budgetById: Budget;
 }
+
+// PUT /budget/:id => Lo que te responde el backend cuando envias
+export interface ApiResponseUpdateBudgetById {
+  budget: Budget;
+}
+
+// PUT /budget/:id => Lo que le vamos a enviar al back
+export interface ApiBudgetUpdateSend {
+  client?: string;
+  products: {
+    productId: string;
+    quantity: number;
+  }[];
+}
