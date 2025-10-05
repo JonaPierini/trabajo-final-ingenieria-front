@@ -80,7 +80,7 @@ export const NewBudgetScreen = () => {
     setSelected(prev => ({...prev, [id]: cleaned}));
   };
 
-  const handleNewProduct = () => {
+  const handleNewBudget = () => {
     // construir payload: [{ productId, quantity }]
     const productPayload = Object.entries(selected).map(
       ([productId, qtyStr]) => ({
@@ -195,7 +195,7 @@ export const NewBudgetScreen = () => {
           })}
         </View>
 
-        <Button title="Confirmar" onPress={handleNewProduct} />
+        <Button title="Confirmar" onPress={handleNewBudget} />
       </Card>
     </View>
   );
